@@ -21,23 +21,23 @@ environment:
   sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
+  cupertino_icons: ^1.0.2
+  dio: ^4.0.4
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.2
-  google_maps_flutter: ^2.0.6
-  provider: ^5.0.0
   flutter_cache_manager: ^3.1.2
-  permission_handler: ^8.1.1
   geolocator: ^7.1.1
+  google_maps_flutter: ^2.0.6
+  permission_handler: ^8.1.1
+  provider: ^5.0.0
 
 dev_dependencies:
+  flutter_lints: ^1.0.3
   flutter_test:
     sdk: flutter
-  flutter_lints: ^1.0.3
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
-
 # The following section is specific to Flutter.
 flutter:
 
@@ -50,13 +50,10 @@ flutter:
   assets:
     - assets/spidey.png
     - assets/car-pin.png
-
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
-
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/assets-and-images/#from-packages
-
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a

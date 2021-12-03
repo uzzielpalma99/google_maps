@@ -1,8 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 
-import '../home_controller.dart';
+import 'package:google_maps/app/ui/pages/home/widgets/where_are_you_going_button.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+
+import '../controller/home_controller.dart';
 
 class MapView extends StatelessWidget {
   const MapView({Key? key}) : super(key: key);
@@ -11,28 +14,35 @@ class MapView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<HomeController>(
       builder: (_, controller, gpsMessageWidget) {
-        if (!controller.gpsEnabled) {
+        final state = controller.state;
+        if (!state.gpsEnabled) {
           return gpsMessageWidget!;
         }
 
         final initialCameraPosition = CameraPosition(
           target: LatLng(
-            controller.initialPosition!.latitude,
-            controller.initialPosition!.longitude,
+            state.initialPosition!.latitude,
+            state.initialPosition!.longitude,
           ),
           zoom: 15,
         );
 
-        return GoogleMap(
-          markers: controller.markers,
-          polylines: controller.polylines,
-          polygons: controller.polygons,
-          onMapCreated: controller.onMapCreated,
-          initialCameraPosition: initialCameraPosition,
-          myLocationButtonEnabled: true,
-          myLocationEnabled: true,
-          compassEnabled: false,
-          onTap: controller.onTap,
+        return Stack(
+          alignment: Alignment.center,
+          children: [
+            GoogleMap(
+              markers: state.markers.values.toSet(),
+              polylines: state.polylines.values.toSet(),
+              onMapCreated: controller.onMapCreated,
+              initialCameraPosition: initialCameraPosition,
+              myLocationButtonEnabled: false,
+              myLocationEnabled: true,
+              compassEnabled: false,
+              zoomControlsEnabled: false, //esconde los botones de zoom
+              // padding: EdgeInsets.only(bottom: 100), //Mantiene visible el logo de google 1 opcion
+            ),
+            const WhereAreYouGoingButton(),
+          ],
         );
       },
       child: Center(
@@ -57,3 +67,5 @@ class MapView extends StatelessWidget {
     );
   }
 }
+
+
